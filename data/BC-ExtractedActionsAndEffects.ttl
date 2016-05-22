@@ -1,0 +1,296 @@
+@prefix data: <http://anonymous.org/data/> .
+@prefix tmr: <http://anonymous.org/vocab/> .
+@prefix nanopub: <http://www.nanopub.org/nschema#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+@prefix pubmed: <http://www.ncbi.nlm.nih.gov/pubmed/> .
+@prefix umls: <http://umls.com> .
+
+###############################################################################
+#### Actions extracted from the guideline conclusions, based on the orignal text
+#Composed Action (1+2)
+data:ActBC2004-DCISExcision-Radiotherapy
+      a                             tmr:ActionType,
+                                    tmr:ComposedEventPreceedence;
+      tmr:hasPart                 data:ActBC2004-LocalExcisionOfDCIS, data:ActBC2004-Radiotherapy;
+      rdfs:comment                  "Addition of radiotherapy following local excision of DCIS"@en.
+
+data:ActBC2004-Radiotherapy
+      a                               tmr:ActionType ;
+      rdfs:label              "radiotherapy"@en ;
+      tmr:interpretedAs             data:ActRadiotherapy.
+
+data:ActBC2004-LocalExcisionOfDCIS
+      a                               tmr:ActionType ;
+      rdfs:label              "local excision of DCIS"@en ;
+      tmr:interpretedAs             data:ActDCISExcision;
+      tmr:relatedTo                 data:ActBreastConservingTherapy.
+
+#Composed Action (1+2) ### To be reviewed BCT for DCSI ???
+data:ActBC2004-TamoxifenTherapyDuringBCTDCIS
+      a                               tmr:ActionType,
+                                      tmr:ComposedEventPreceedence;
+      tmr:hasPart                   data:ActBC2004-TherapyWithTamoxifen, data:ActBC2004-Breast-ConservingTreatmentOfDCIS;
+      rdfs:comment                    "Adjuvant therapy with tamoxifen in breast-conserving treatment of DCIS, removed with tumour-free excision margins,"@en .
+
+data:ActBC2004-TherapyWithTamoxifen
+      a                               tmr:ActionType ;
+      rdfs:label              "therapy with tamoxifen"@en ;
+      tmr:interpretedAs             data:ActTamoxifenTherapy.
+
+data:ActBC2004-Breast-ConservingTreatmentOfDCIS
+      a                               tmr:ActionType ;
+      rdfs:label              "breast-conserving treatment of DCIS"@en ;
+      tmr:interpretedAs             data:ActBreastConservingTherapyOfDCIS;
+      tmr:relatedTo                 data:ActBreastConservingTherapy.
+
+#Composed Action (1+2) ###
+data:ActBC2004-BreastConservingTherapy-Irradiation
+      a                               tmr:ActionType,
+                                      tmr:ComposedEventPreceedence;
+      tmr:hasPart                   data:ActBC2004-BreastConservingTherapy, data:ActBC2004-Irradiation;
+      rdfs:comment                    "Breast-conserving therapy including irradiation"@en .
+
+data:ActBC2004-BreastConservingTherapy
+      a                               tmr:ActionType ;
+      rdfs:label              "breast-conserving therapy"@en ;
+      tmr:interpretedAs             data:ActBreastConservingTherapy.
+
+data:ActBC2004-Irradiation
+      a                               tmr:ActionType ;
+      rdfs:label              "irradiation"@en ;
+      tmr:interpretedAs             data:ActRadiotherapy .
+
+data:ActBC2004-Boost
+      a                               tmr:ActionType ;
+      rdfs:label              "boost"@en ;
+      tmr:interpretedAs             data:ActAdministrationOfRadiationBoostDose;
+      tmr:relatedTo                 data:Dose-ResponseRelationshipRadiation.
+
+data:ActBC2004-PostoperativeLocoregionalRadiotherapy
+      a                               tmr:ActionType ;
+      rdfs:label              "postoperative locoregional radiotherapy"@en ;
+      tmr:interpretedAs             data:ActPostoperativeLocoregionalRadiotherapyInBreastCancer .
+
+data:ActBC2004-BreastReconstructionImediatellyAfterMastectomy
+      a                               tmr:ActionType,
+                                      tmr:ComposedEventPreceedence;
+      tmr:hasPart                   data:ActBC2004-BreastReconstruction, data:ActBC2004-Mastectomy;
+      rdfs:comment                    "breast reconstruction immediately following the mastectomy"@en ;
+      tmr:interpretedAs             data:ActPrimaryBreastReconstruction .
+
+data:ActBC2004-BreastReconstruction
+      a                               tmr:ActionType ;
+      rdfs:label              "breast reconstruction"@en ;
+      tmr:interpretedAs             data:ActBreastReconstruction.
+
+data:ActBC2004-Mastectomy
+      a                               tmr:ActionType ;
+      rdfs:label              "mastectomy"@en ;
+      tmr:interpretedAs             data:ActMastectomy.
+
+data:ActBC2004-PrimaryBreastReconstruction
+      a                               tmr:ActionType ;
+      rdfs:label              "primary breast reconstruction"@en ;
+      tmr:interpretedAs             data:ActPrimaryBreastReconstruction .
+
+data:ActBC2004-SecondaryBreastReconstruction
+      a                               tmr:ActionType ;
+      rdfs:label              "secondary breast reconstruction"@en ;
+      tmr:interpretedAs             data:ActSecondaryBreastReconstruction.
+
+#Composed Action (1+2) ###
+data:ActBC2004-SkinSparingMastectomy-BreastReconstruction
+      a                               tmr:ActionType,
+                                      tmr:ComposedEventPreceedence;
+      tmr:hasPart                   data:ActBC2004-Skin-sparingMastectomy, data:ActBC2004-ImmediateReconstruction;
+      rdfs:comment                    "skin-sparing mastectomy followed by immediate reconstruction"@en .
+
+data:ActBC2004-Skin-sparingMastectomy
+      a                               tmr:ActionType ;
+      rdfs:label              "skin-sparing mastectomy"@en ;
+      tmr:interpretedAs             data:ActSkinSparingMastectomy;
+      tmr:relatedTo                 data:ActMastectomy.
+
+data:ActBC2004-ImmediateReconstruction
+      a                               tmr:ActionType ;
+      rdfs:label              "immediate reconstruction"@en ;
+      tmr:interpretedAs             data:ActPrimaryBreastReconstruction .
+
+data:ActBC2004-SiliconeImplants
+      a                               tmr:ActionType ;
+      rdfs:label              "silicone implants"@en ;
+      tmr:interpretedAs             data:ActSiliconImplant.
+
+#Composed Action (1+2)
+data:ActBC2004-RadiotherapyAfterBreastReconstructiion
+      a                             tmr:ActionType,
+                                    tmr:ComposedEventPreceedence;
+      tmr:hasPart                 data:ActBC2004-BreastReconstruction, data:ActBC2004-Radiotherapy;
+      rdfs:comment                  "Radiotherapy after Breast Reconstruction"@en.
+
+################################################################################
+#### Transitions and Properties extracted from the guideline conclusions, based on the orignal text
+#Transtion (Effect)
+data:TrBC2004-LowerRiskOfLocalRecurrence
+      a                               tmr:TransitionType ;
+      rdfs:comment                    "significantly lower risk of Local Recurrence"@en ;
+      rdfs:comment                    "The risk of local recurrence is lower"@en ;
+      tmr:affects                   data:TropeBC2004-RiskOfLocalRecurrence.
+
+data:TropeBC2004-RiskOfLocalRecurrence
+      a                               tmr:TropeType;
+      rdfs:label              "risk of local recurrence"@en ;
+      tmr:interpretedAs             data:RiskOfBreastCancerLocalRecurrence;
+      tmr:relatedTo                 data:NeoplasmRecurrenceLocal.
+
+data:TrBC2004-LimitedImprovementLocalTumourControl
+      a                               tmr:TransitionType ;
+      rdfs:comment                    "limited improvement of local tumour control"@en ;
+      tmr:affects                   data:TropeBC2004-LocalTumour.
+
+data:TropeBC2004-LocalTumour
+      a                               tmr:TropeType;
+      rdfs:label              "local tumour"@en ;
+      tmr:interpretedAs             data:BreastLocalTumour;
+      tmr:relatedTo                 data:CarcinomaInSitu.
+
+data:TrBC2004-NoSurvivalBenefit
+      a                               tmr:TransitionType ;
+      rdfs:comment                    "No survival Benefit"@en ;
+      tmr:affects                   data:TropeBC2004-SurvivalBenefit.
+
+data:TropeBC2004-SurvivalBenefit
+      a                               tmr:TropeType;
+      rdfs:label              "survival benefit"@en ;
+      tmr:interpretedAs             data:SurvivalChance;
+      tmr:relatedTo                 data:SurvivalAnalysis.
+
+
+data:TrBC2004-SafeSurvivalRate
+      a                               tmr:TransitionType ;
+      rdfs:comment                    "Survival Rate"@en ;
+      tmr:affects                   data:TropeBC2004-SurvivalRate.
+
+data:TropeBC2004-SurvivalRate
+      a                               tmr:TropeType;
+      rdfs:label              "survival rate"@en ;
+      tmr:interpretedAs             data:SurvivalChance;
+      tmr:relatedTo                 data:SurvivalAnalysis.
+
+data:TrBC2004-LowCosmeticDamage
+      a                               tmr:TransitionType ;
+      rdfs:comment                    "An excellent cosmetic result"@en;
+      tmr:affects                   data:TropeBC2004-CosmeticResult.
+
+data:TropeBC2004-CosmeticResult
+      a                               tmr:TropeType;
+      rdfs:label              "cosmetic result"@en ;
+      tmr:interpretedAs             data:QualityBreastAppearance;
+      tmr:relatedTo                 data:BodyImage, data:Esthetics.
+
+data:TrBC2004-LowerRiskLocoregionalRecurrence
+      a                               tmr:TransitionType ;
+      rdfs:comment                    "decrease risk of locoregional recurrence"@en;
+      tmr:affects                   data:TropeBC2004-RiskOfLocoregionalRecurrence;
+      tmr:derivative                "decrease"@en.
+
+data:TropeBC2004-RiskOfLocoregionalRecurrence
+      a                               tmr:TropeType;
+      rdfs:label              "risk of locoregional recurrence"@en ;
+      tmr:interpretedAs             data:RiskLocoregionalBreastCancerRecurrence.
+
+data:TrBC2004-IncreaseSurvivalChance
+      a                               tmr:TransitionType ;
+      rdfs:comment                    "Increase of Survival Chance"@en ;
+      tmr:affects                   data:TropeBC2004-ChanceOfSurvival .
+
+data:TropeBC2004-ChanceOfSurvival
+      a                               tmr:TropeType;
+      rdfs:label              "chance of survival"@en ;
+      tmr:interpretedAs             data:SurvivalChance;
+      tmr:relatedTo                 data:SurvivalAnalysis.
+
+
+data:TrBC2004-HigherSatisfactionWithBreastAppearance
+      a                               tmr:TransitionType ;
+      rdfs:comment                    "more satisfied with the aesthetic result"@en;
+      tmr:affects                   data:TropeBC2004-AestheticResult.
+
+data:TropeBC2004-AestheticResult
+      a                               tmr:TropeType;
+      rdfs:label              "aesthetic result"@en ;
+      tmr:interpretedAs             data:QualityBreastAppearance;
+      tmr:relatedTo                 data:BodyImage, data:Esthetics.
+
+data:TrBC2004-HigherPsychosocialWellbeing
+      a                               tmr:TransitionType ;
+      rdfs:comment                    "Experience greater psychosocial wellbeing"@en;
+      tmr:hasExpectedSituation        data:SitBC2004-PsychosocialWellbeing.
+
+data:SitBC2004-PsychosocialWellbeing
+      a                             tmr:SituationType;
+      rdfs:label              "psychosocial wellbeing"@en ;
+      tmr:interpretedAs             data:PsychosocialWellbeing;
+      tmr:relatedTo                 data:Depression.
+
+data:TrBC2004-HigherRiskOfBreastCancerRecurrence
+      a                               tmr:TransitionType ;
+      rdfs:comment                    "Higher risk of Breast Cancer Recurrence"@en ;
+      tmr:affects                   data:TropeBC2004-RiskOfRecurrentBreastCancer .
+
+data:TropeBC2004-RiskOfRecurrentBreastCancer
+      a                               tmr:TropeType;
+      rdfs:label              "risk of recurrent breast cancer"@en ;
+      tmr:interpretedAs             data:RiskOfBreastCancerRecurrence;
+      tmr:relatedTo                 data:NeoplasmRecurrence.
+
+data:TrBC2004-HigherRiskOfBreastCancerLocalRecurrence
+      a                               tmr:TransitionType ;
+      rdfs:comment                    "higher risk of Breast Cancer Local Recurrence"@en ;
+      tmr:affects                   data:TropeBC2004-RiskOfLocalRecurrenceOfBreastCancer.
+
+data:TrBC2004-HigherRiskOfBreastCancerSystemicRecurrence
+      a                               tmr:TransitionType ;
+      rdfs:comment                    "higher risk of Breast Cancer Systemic Recurrence"@en ;
+      tmr:affects                   data:TropeBC2004-RiskOfSystemicRecurrenceOfBreastCancer.
+
+data:TropeBC2004-RiskOfLocalRecurrenceOfBreastCancer
+      a                               tmr:TropeType;
+      rdfs:label              "risk of local recurrence of breast cancer"@en ;
+      tmr:interpretedAs             data:RiskOfBreastCancerLocalRecurrence;
+      tmr:relatedTo                 data:NeoplasmRecurrenceLocal.
+
+data:TropeBC2004-RiskOfSystemicRecurrenceOfBreastCancer
+      a                               tmr:TropeType;
+      rdfs:label              "risk of systemic recurrence of breast cancer"@en ;
+      tmr:interpretedAs             data:RiskOfBreastCancerSystemicRecurrence ;
+      tmr:relatedTo                 data:NeoplasmMetastasis.
+
+data:TrBC2004-SystemicSyndromes
+      a                             tmr:TransitionType ;
+      tmr:comment                   "Increase of systemic syndromes"@en;
+      tmr:hasExpectedSituation      data:SitBC2004-SystemicSyndromes.
+
+data:SitBC2004-SystemicSyndromes
+      a                             tmr:SituationType;
+      rdfs:label              "systemic syndromes"@en ;
+      tmr:interpretedAs             data:SystemicSyndromes;
+      tmr:relatedTo                 data:HealthImplications.
+
+data:TrBC2004-ComplicationOccurrence
+      a                             tmr:TransitionType ;
+      tmr:comment                   "significantly more complications"@en;
+      tmr:hasExpectedSituation      data:SitBC2004-Complications.
+
+data:SitBC2004-Complications
+      a                             tmr:SituationType;
+      rdfs:label              "complications"@en ;
+      tmr:interpretedAs             data:Complications.

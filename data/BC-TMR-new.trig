@@ -1,0 +1,303 @@
+@prefix data: <http://anonymous.org/data/> .
+@prefix tmr: <http://anonymous.org/vocab/> .
+@prefix nanopub: <http://www.nanopub.org/nschema#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix pubmed: <http://www.ncbi.nlm.nih.gov/pubmed/> .
+@prefix umls: <http://umls.com> .
+
+##############################################################
+#Nanopublications for the causation beliefs
+##############################################################
+
+##########################################################################
+#Conclusion gl003-qh141029_1_1
+#1 (original)
+data:CB-DCISExcision-Radiotherapy-Cancer {
+    data:ActBC2004-DCISExcision-Radiotherapy
+        tmr:causes                  data:TrBC2004-LowerRiskOfLocalRecurrence .
+    data:CB-DCISExcision-Radiotherapy-Cancer
+        a                             tmr:CausationBelief ;
+        tmr:conclusionID            "1_1";
+        #tmr:strength                "L1"^^xsd:string;
+        #tmr:frequency               "often"^^xsd:string;
+        rdfs:comment                  "Addition of radiotherapy following local excision of DCIS results in a significantly lower risk of local recurrence (this is valid for all subgroups)."@en;
+        # has as evidence other assertions derived from these pubmed articles:
+        tmr:hasEvidence             [ prov:wasDerivedFrom pubmed:9469327 ],
+                                      [ prov:wasDerivedFrom pubmed:8292119 ],
+                                      [ prov:wasDerivedFrom pubmed:10683002 ],
+                                      [ prov:wasDerivedFrom pubmed:12867108 ].
+}
+
+##########################################################################
+#Conclusion gl003-qh141029_1_3
+#3 - is divided in two conclusions
+data:CB-TamoxifenTherapy-CancerControl-SurvivalBenefit {
+    data:CB-TamoxifenTherapy-CancerControl-SurvivalBenefit
+        a                                 tmr:CausationBelief ;
+        tmr:conclusionID                "1_3";
+        tmr:hasPart                     data:CB-TamoxifenTherapy-CancerControl,
+                                          data:CB-TamoxifenTherapy-SurvivalBenefit.
+}
+
+data:CB-TamoxifenTherapy-CancerControl {
+    data:ActBC2004-TamoxifenTherapyDuringBCTDCIS
+        tmr:causes                    data:TrBC2004-LimitedImprovementLocalTumourControl .
+    data:CB-TamoxifenTherapy-CancerControl
+        a                               tmr:CausationBelief ;
+        #tmr:strength                 "L1"^^xsd:string;
+        #tmr:frequency                "rarely"^^xsd:string; #complement of often does not improve
+        rdfs:comment                    "Adjuvant therapy with tamoxifen in breast-conserving treatment of DCIS, removed with tumour-free excision margins, results in limited improvement of local tumour control [...]."@en;
+        tmr:hasEvidence               [ prov:wasDerivedFrom pubmed:12867108 ],
+                                        [ prov:wasDerivedFrom pubmed:10630169 ].
+}
+
+data:CB-TamoxifenTherapy-SurvivalBenefit {
+    data:ActBC2004-TamoxifenTherapyDuringBCTDCIS
+        tmr:causes                    data:TrBC2004-NoSurvivalBenefit .
+    data:CB-TamoxifenTherapy-SurvivalBenefit
+        a                               tmr:CausationBelief ;
+        #tmr:strength                 "L1"^^xsd:string;
+        #tmr:frequency                "never"^^xsd:string;
+        rdfs:comment                    "Adjuvant therapy with tamoxifen in breast-conserving treatment of DCIS, removed with tumour-free excision margins, results in [...] no survival benefit."@en;
+        tmr:hasEvidence               [ prov:wasDerivedFrom pubmed:12867108 ],
+                                        [ prov:wasDerivedFrom pubmed:10630169 ].
+}
+
+##########################################################################
+#Conclusion gl003-qh141029_3_1
+#4
+data:CB-BreastConservingTher-Irradiation-Survival {
+    data:ActBC2004-BreastConservingTherapy-Irradiation
+        tmr:causes                      data:TrBC2004-SafeSurvivalRate .
+    data:CB-BreastConservingTher-Irradiation-Survival
+        a                                 tmr:CausationBelief ;
+        tmr:conclusionID                "3_1";
+        #tmr:strength                    "L1"^^xsd:string;
+        #tmr:frequency                   "often"^^xsd:string;
+        rdfs:comment                      "Breast-conserving therapy including irradiation is safe because the survival rate is comparable to that seen after modified radical mastectomy."@en;
+        tmr:hasEvidence                 [ prov:wasDerivedFrom pubmed:6362840 ],
+                                          [ prov:wasDerivedFrom pubmed:2144152 ],
+                                          [ prov:wasDerivedFrom pubmed:2927449 ],
+                                          [ prov:wasDerivedFrom pubmed:12377957 ],
+                                          [ prov:wasDerivedFrom pubmed:1627428 ],
+                                          [ prov:wasDerivedFrom pubmed:11355595 ],
+                                          [ prov:wasDerivedFrom pubmed:1236548 ],
+                                          [ prov:wasDerivedFrom pubmed:15316061 ],
+                                          [ prov:wasDerivedFrom pubmed:12812844 ],
+                                          [ prov:wasDerivedFrom pubmed:15342805 ],
+                                          [ prov:wasDerivedFrom pubmed:15342804 ],
+                                          [ prov:wasDerivedFrom pubmed:2144152 ].
+}
+
+
+##########################################################################
+#Conclusion gl003-qh141029_3_2
+#5 (original)
+data:CB-BreastConservingTherapy-CosmeticResult {
+    data:ActBC2004-BreastConservingTherapy
+        tmr:causes                        data:TrBC2004-LowCosmeticDamage .
+    data:CB-BreastConservingTherapy-CosmeticResult
+        a                                   tmr:CausationBelief ;
+        tmr:conclusionID                  "3_2";
+        #tmr:strength                      "L3"^^xsd:string; ### Grade3??
+        #tmr:frequency                     "often"^^xsd:string; # 70%
+        rdfs:comment                        "An excellent cosmetic result can be achieved in at least 70% of patients after breast-conserving therapy."@en;
+        tmr:hasEvidence                   [ prov:wasDerivedFrom pubmed:10524422 ],
+                                            [ prov:wasDerivedFrom pubmed:1639654 ].
+}
+
+##########################################################################
+#Conclusion gl003-qh141029_3_3
+#6
+data:CB-Boost-LocalCancerRecurrence {
+    data:ActBC2004-Boost
+        tmr:causes                       data:TrBC2004-LowerRiskOfLocalRecurrence.
+    data:CB-Boost-LocalCancerRecurrence
+        a                                  tmr:CausationBelief ;
+        tmr:conclusionID                 "3_3";
+        #tmr:strength                    "L1"^^xsd:string; ### Grade3??
+        #tmr:frequency                   "often"^^xsd:string;
+        rdfs:comment                       "After a boost the risk of local recurrence is lower. The absolute benefit of a boost following complete resection decreases with patient age."@en;
+        tmr:hasEvidence                  [ prov:wasDerivedFrom pubmed:1794170 ],
+                                           [ prov:wasDerivedFrom pubmed:117577015 ].
+}
+
+
+##########################################################################
+#Conclusion gl003-qh141029_4_1
+#10 - divided in two conclusions
+data:CB-PostoperativeLocoregionalRadiotherapy-RiskRecurrence-SurvivalChance {
+    data:CB-PostoperativeLocoregionalRadiotherapy-RiskRecurrence-SurvivalChance
+        a                                 tmr:CausationBelief ;
+        tmr:conclusionID                "4_1";
+        tmr:hasPart                     data:CB-PostoperativeLocoregionalRadiotherapyRiskRecurrence,
+                                          data:CB-PostoperativeLocoregionalRadiotherapySurvivalChance;
+        tmr:hasEvidence                 [ prov:wasDerivedFrom pubmed:10832826 ],
+                                          [ prov:wasDerivedFrom pubmed:10715291 ],
+                                          [ prov:wasDerivedFrom pubmed:9309100 ],
+                                          [ prov:wasDerivedFrom pubmed:9395428 ],
+                                          [ prov:wasDerivedFrom pubmed:10335782 ].
+}
+
+data:CB-PostoperativeLocoregionalRadiotherapyRiskRecurrence {
+    data:ActBC2004-PostoperativeLocoregionalRadiotherapy
+        tmr:causes                      data:TrBC2004-LowerRiskLocoregionalRecurrence .
+    data:CB-PostoperativeLocoregionalRadiotherapyRiskRecurrence
+        a                                 tmr:CausationBelief ;
+        #tmr:strength                    ""^^xsd:string; ### Grade3??
+        #tmr:frequency                   "often"^^xsd:string;
+        rdfs:comment                      "Postoperative locoregional radiotherapy reduces the risk of locoregional recurrence by two-thirds."@en.
+}
+
+data:CB-PostoperativeLocoregionalRadiotherapySurvivalChance {
+    data:ActBC2004-PostoperativeLocoregionalRadiotherapy
+        tmr:causes                      data:TrBC2004-IncreaseSurvivalChance .
+    data:CB-PostoperativeLocoregionalRadiotherapySurvivalChance
+        a                                 tmr:CausationBelief ;
+        #tmr:strength                    ""^^xsd:string; ### Grade3??
+        #tmr:frequency                   "often"^^xsd:string;
+        rdfs:comment                      "Postoperative locoregional radiotherapy results in a better chance of survival."@en.
+}
+
+
+##########################################################################
+#Conclusion gl003-qh141029_5_1
+#12 - divided in two conclusions
+data:CB-PrimaryBreastReconstruction-SatisfactionAppearance-WellBeing {
+    data:CB-PrimaryBreastReconstruction-SatisfactionAppearance-WellBeing
+        a                                 tmr:CausationBelief ;
+        tmr:conclusionID                "5_1";
+        tmr:hasPart                     data:CB-PrimaryBreastReconstruction-SatisfactionAppearance,
+                                          data:CB-PrimaryBreastReconstruction-WellBeing;
+        tmr:hasEvidence                 [ prov:wasDerivedFrom pubmed:10718173 ],
+                                          [ prov:wasDerivedFrom pubmed:6709743 ],
+                                          [ prov:wasDerivedFrom pubmed:7652060 ].
+}
+
+data:CB-PrimaryBreastReconstruction-SatisfactionAppearance {
+    data:ActBC2004-BreastReconstructionImediatellyAfterMastectomy
+        tmr:causes                      data:TrBC2004-HigherSatisfactionWithBreastAppearance .
+    data:CB-PrimaryBreastReconstruction-SatisfactionAppearance
+        a                                 tmr:CausationBelief ;
+        #tmr:strength                     ""^^xsd:string; ### Grade3??
+        #tmr:frequency                   ""^^xsd:string;
+        rdfs:comment                      "A descriptive study found that women who undergo breast reconstruction immediately following the mastectomy are more satisfied with the aesthetic result than women who undergo secondary reconstruction."@en.
+}
+
+data:CB-PrimaryBreastReconstruction-WellBeing {
+    data:ActBC2004-BreastReconstructionImediatellyAfterMastectomy
+        tmr:causes                      data:TrBC2004-HigherPsychosocialWellbeing .
+    data:CB-PrimaryBreastReconstruction-WellBeing
+        a                                 tmr:CausationBelief ;
+        #tmr:strength                    ""^^xsd:string; ### Grade3??
+        #tmr:frequency                   ""^^xsd:string;
+        rdfs:comment                      "A descriptive study found that women who undergo breast reconstruction immediately following the mastectomy experience greater psychosocial wellbeing than women who undergo secondary reconstruction."@en.
+}
+
+##########################################################################
+#Conclusion gl003-qh141029_6_1
+#13 - is divided in two conclusions
+data:CB-Primary-SecondaryBreastReconst-NoRiskCancerRecurrence {
+    data:CB-Primary-SecondaryBreastReconst-NoRiskCancerRecurrence
+        a                                 tmr:CausationBelief ;
+        #tmr:conclusionID                "6_1";
+        tmr:hasPart                     data:CB-PrimaryBreastReconst-NoRiskCancerRecurrence,
+                                          data:CB-SecondaryBreastReconst-NoRiskCancerRecurrence;
+        tmr:hasEvidence                 [ prov:wasDerivedFrom pubmed:1985335 ],
+                                          [ prov:wasDerivedFrom pubmed:2545180 ],
+                                          [ prov:wasDerivedFrom pubmed:4034759 ].
+}
+
+data:CB-PrimaryBreastReconst-NoRiskCancerRecurrence {
+    data:ActBC2004-PrimaryBreastReconstruction
+        tmr:causes                      data:TrBC2004-HigherRiskOfBreastCancerRecurrence .
+    data:CB-PrimaryBreastReconst-NoRiskCancerRecurrence
+        a                                 tmr:CausationBelief ;
+        tmr:conclusionID                 "6_1.1";
+        #tmr:strength                    "medium"^^xsd:string; ### Grade3??
+        #tmr:frequency                   "never"^^xsd:string;
+        rdfs:comment                      "There are no signs that primary breast reconstruction results in a higher risk of recurrent breast cancer."@en.
+}
+
+data:CB-SecondaryBreastReconst-NoRiskCancerRecurrence {
+    data:ActBC2004-SecondaryBreastReconstruction
+        tmr:causes                      data:TrBC2004-HigherRiskOfBreastCancerRecurrence .
+    data:CB-SecondaryBreastReconst-NoRiskCancerRecurrence
+        a                                 tmr:CausationBelief ;
+        tmr:conclusionID                 "6_1.2";
+        #tmr:strength                    "medium"^^xsd:string; ### Grade3??
+        #tmr:frequency                   "never"^^xsd:string;
+        rdfs:comment                      "There are no signs that secondary breast reconstruction results in a higher risk of recurrent breast cancer."@en.
+}
+
+
+##########################################################################
+#Conclusion gl003-qh141029_6_2
+#14 - is divided in two conclusions
+data:CB-SkinSparingMastectomy-BreastReconst-Local-SystemicRecur {
+    data:CB-SkinSparingMastectomy-BreastReconst-Local-SystemicRecur
+        a                                 tmr:CausationBelief ;
+        tmr:conclusionID                "6_2";
+        tmr:hasPart                     data:CB-SkinSparingMastectomy-BreastReconst-LocalRecur,
+                                          data:CB-SkinSparingMastectomy-BreastReconst-SystemicRecur;
+        tmr:hasEvidence                 [ prov:wasDerivedFrom pubmed:9142378 ],
+                                          [ prov:wasDerivedFrom pubmed:1985335 ].
+}
+
+data:CB-SkinSparingMastectomy-BreastReconst-LocalRecur {
+    data:ActBC2004-SkinSparingMastectomy-BreastReconstruction
+        tmr:causes                      data:TrBC2004-HigherRiskOfBreastCancerLocalRecurrence .
+    data:CB-SkinSparingMastectomy-BreastReconst-LocalRecur
+        a                                 tmr:CausationBelief ;
+        #tmr:strength                   "medim"^^xsd:string; ### Grade3??
+        #tmr:frequency                  "never"^^xsd:string;
+        rdfs:comment                      "There are no indications to suggest that a skin-sparing mastectomy followed by immediate reconstruction leads to a higher risk of local recurrence of breast cancer."@en.
+}
+
+data:CB-SkinSparingMastectomy-BreastReconst-SystemicRecur {
+    data:ActBC2004-SkinSparingMastectomy-BreastReconstruction
+        tmr:causes                      data:TrBC2004-HigherRiskOfBreastCancerSystemicRecurrence .
+    data:CB-SkinSparingMastectomy-BreastReconst-SystemicRecur
+        a                                 tmr:CausationBelief ;
+        #tmr:strength                   "medim"^^xsd:string; ### Grade3??
+        #tmr:frequency                  "never"^^xsd:string;
+        rdfs:comment                      "There are no indications to suggest that a skin-sparing mastectomy followed by immediate reconstruction leads to a higher risk of systemic recurrence of breast cancer."@en.
+}
+
+##########################################################################
+#Conclusion gl003-qh141029_7_1
+#15 (original)
+data:CB-SiliconImplanting-SystemicSyndromes {
+    data:ActBC2004-SiliconeImplants
+        tmr:causes                      data:TrBC2004-SystemicSyndromes .
+    data:CB-SiliconImplanting-SystemicSyndromes
+        a                                 tmr:CausationBelief ;
+        tmr:conclusionID                 "7_1";
+        #tmr:strength                    "L3"^^xsd:string; ### Grade3??
+        #tmr:frequency                   "never"^^xsd:string; ##
+        rdfs:comment                      "There is no causal relationship between silicone implants and the occurrence of systemic syndromes."@en;
+        tmr:hasEvidence                 [ prov:wasDerivedFrom pubmed:9128992 ],
+                                          [ prov:wasDerivedFrom pubmed:9492663 ].
+}
+
+##########################################################################
+#Conclusion gl003-qh141029_8_1
+#16
+data:CB-Radiotherapy-BreastReconst-Complications {
+    data:ActBC2004-RadiotherapyAfterBreastReconstructiion
+        tmr:causes                      data:TrBC2004-ComplicationOccurrence .
+    data:CB-Radiotherapy-BreastReconst-Complications
+        a                                 tmr:CausationBelief ;
+        tmr:conclusionID                 "8_1";
+        #tmr:strength                    ""^^xsd:string; ### Grade3??
+        #tmr:frequency                   ""^^xsd:string;
+        rdfs:comment                      "Radiotherapy is associated with significantly more complications in the presence of a breast reconstruction."@en;
+        tmr:hasEvidence                 [ prov:wasDerivedFrom pubmed:10873353 ],
+                                          [ prov:wasDerivedFrom pubmed:10946929 ].
+}

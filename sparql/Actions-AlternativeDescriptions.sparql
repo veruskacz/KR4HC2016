@@ -1,0 +1,39 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX tmr: <http://anonymous.org/vocab/>
+SELECT ?id (GROUP_CONCAT (?actionLabel; separator="+") AS ?term)
+WHERE {
+  ?conclusion	rdf:type	    tmr:CausationBelief .
+  ?conclusion	tmr:conclusionID    ?id
+  { GRAPH ?conclusion { 	#main action of main conclusion has description
+    ?action 	tmr:causes 	    [] }
+  } UNION {?conclusion tmr:hasPart  ?subConclusion.
+    GRAPH ?subConclusion {
+    ?action 	tmr:causes 	    [] }}.
+  { SELECT ?action (CONCAT("(",GROUP_CONCAT (CONCAT("(",?label,")");
+  					separator="+OR+"), ")") AS ?actionLabel)
+    WHERE {
+      		{?action tmr:interpretedAs ?altAction}
+      UNION {?action tmr:relatedTo ?altAction}.
+      { ?altAction rdfs:label ?label }
+	  UNION {
+        {SELECT ?action (GROUP_CONCAT (?label2; separator="+") AS ?label)
+    	 WHERE {?action tmr:hasPart ?subAction.
+            {?subAction tmr:interpretedAs ?altAction}
+      	 UNION {?subAction tmr:relatedTo ?altAction}.
+    	 	?altAction rdfs:label ?label2
+          } GROUP BY ?action } }
+    } GROUP BY ?action  }
+	UNION
+  	{ SELECT ?action (CONCAT("(",GROUP_CONCAT (?actionLabel2; separator="+"), ")") AS ?actionLabel)
+    WHERE {
+      	?action tmr:hasPart	?subAction.
+		FILTER NOT EXISTS { {?action tmr:interpretedAs ?altAction}
+					      UNION {?action tmr:relatedTo ?altAction} }.
+		{ SELECT ?subAction (CONCAT("(",GROUP_CONCAT (CONCAT("(",?label2,")"); separator="+OR+"), ")") AS ?actionLabel2)
+    	WHERE {{?subAction tmr:interpretedAs ?altAction}
+      	 UNION {?subAction tmr:relatedTo ?altAction}.
+    	 ?altAction rdfs:label ?label2
+		} GROUP BY ?subAction }
+    } GROUP BY ?action  }
+} GROUP BY ?id

@@ -1,0 +1,175 @@
+@prefix data: <http://anonymous.org/data/> .
+@prefix tmr: <http://anonymous.org/vocab/> .
+@prefix nanopub: <http://www.nanopub.org/nschema#> .
+@prefix oa: <http://www.w3.org/ns/oa#> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix pubmed: <http://www.ncbi.nlm.nih.gov/pubmed/> .
+@prefix umls: <http://umls.com> .
+
+#############################################################
+
+data:ActDCISExcision
+      a                           tmr:ActionType ;
+      rdfs:label                  "local excision of DCIS"@en ;
+      rdfs:label                  "Surgical extraction of DCIS"@en .
+      #tmr:umlsCode                        umls:C1293139. #	Surgical extraction
+
+data:ActRadiotherapy
+      a                           tmr:ActionType ;
+      rdfs:label                  "Radiotherapy"@en ;
+      rdfs:label                  "Radiation"@en ;
+      rdfs:label                  "Irradiation"@en ;
+      tmr:umlsCode              umls:C0851346. # Radiation
+                                  #umls:C0243005. # Radiation Oncology specialty ?
+
+data:RiskOfBreastCancerLocalRecurrence
+      a                           tmr:TropeType ;
+      rdfs:label                  "Risk of Breast Cancer Local Recurrence"@en .
+
+data:NeoplasmRecurrence
+      a                           tmr:EventType ;
+      rdfs:label                  "Neoplasm Recurrence"@en .
+
+data:NeoplasmRecurrenceLocal
+      a                           tmr:EventType ;
+      rdfs:label                  "Neoplasm Recurrence Local"@en .
+
+data:ActTamoxifenTherapy
+      a                               tmr:ActionType ;
+      rdfs:label                      "Tamoxifen therapy"@en ;
+      tmr:administrationOf          data:Tamoxifen .
+
+data:Tamoxifen
+      a                               tmr:DrugType ;
+      rdfs:label                      "Tamoxifen"@en .
+
+data:ActBreastConservingTherapyOfDCIS
+      a                               tmr:ActionType ;
+      rdfs:label                      "Breast Conserving Therapy of DCIS"@en;
+      tmr:mapstoumls                umls:C0917927. # Breast-Conserving Surgery
+
+data:BreastLocalTumour
+      a                               tmr:TropeType ;
+      rdfs:label                      "Local Tumour of Breast"@en;
+      rdfs:label                      "Breast Cancer"@en.
+
+data:CarcinomaInSitu
+      a                               tmr:TropeType ;
+      rdfs:label                      "Carcinoma in Situ".
+
+data:SurvivalChance
+      a                               tmr:TropeType ;
+      rdfs:label                      "Survival Benefit"@en ;
+      rdfs:label                      "Survival Rate"@en ;
+      rdfs:label                      "Survival Chance"@en ;
+      rdfs:label                      "Survivorship"@en .
+
+data:SurvivalAnalysis
+      a                               tmr:ActionType ;
+      rdfs:label                      "Survival Analysis"@en .
+
+data:ActBreastConservingTherapy
+      a                               tmr:ActionType;
+      rdfs:label                      "Breast-Conserving Therapy"@en ,
+                                      "Mastectomy, Segmental"@en.
+
+data:QualityBreastAppearance
+      a                               tmr:TropeType ;
+      rdfs:label                      "Quality Breast Appearance"@en;
+      rdfs:label                      "Breast Appearance"@en;
+      rdfs:label                      "Breast Aesthetics"@en;
+      rdfs:label                      "Cosmetic Result of Breast"@en.
+
+data:BodyImage
+      a                               tmr:TropeType ;
+      rdfs:label                      "Body Image"@en.
+
+data:Esthetics
+#      a                               tmr:TropeType ;
+      rdfs:label                      "Esthetics"@en.
+
+data:ActAdministrationOfRadiationBoostDose
+      a                              tmr:ActionType ;
+      rdfs:label                     "Radiation Boost Dose"@en.
+
+data:Dose-ResponseRelationshipRadiation
+#      a                              tmr:EventType ;
+      rdfs:label                     "Dose-Response Relationship, Radiation"@en.
+
+data:ActPostoperativeLocoregionalRadiotherapyInBreastCancer
+      a                               tmr:ActionType ;
+      rdfs:label                      "Postoperative Locoregional Radiotherapy in Breast Cancer"@en.
+
+data:RiskLocoregionalBreastCancerRecurrence
+      a                               tmr:TropeType;
+      tmr:originalText              "risk of locoregional recurrence"@en ;
+      rdfs:label                      "Risk of Locoregional Breast Cancer Recurrence"@en.
+
+data:ActPrimaryBreastReconstruction
+      a                               tmr:ActionType ;
+      # rdfs:comment                    "breast reconstruction immediately following the mastectomy"@en;
+      rdfs:label                      "Immediate Breast Reconstruction"@en;
+      rdfs:label                      "Primary Breast Reconstruction"@en ;
+      tmr:mapstoumls                umls:C2732974	. #Reconstruction of breast with immediate insertion of breast prosthesis
+
+data:PsychosocialWellbeing
+      a                               tmr:TropeType;
+      rdfs:label                      "Psychosocial Wellbeing"@en .
+
+data:Depression
+      a                               tmr:EvenType;
+      rdfs:label                      "Depression"@en .
+
+data:ActSecondaryBreastReconstruction
+      a                               tmr:ActionType ;
+      rdfs:label                      "Secondary Breast Reconstruction"@en ;
+      rdfs:label                      "Delayed Breast Reconstruction"@en .
+
+data:RiskOfBreastCancerRecurrence
+      a                               tmr:TropeType ;
+      rdfs:label                      "risk of recurrent breast cancer"@en ;
+      rdfs:label                      "Risk of Breast Cancer Recurrence"@en .
+
+data:ActSkinSparingMastectomy
+      a                               tmr:ActionType ;
+      rdfs:label                      "Skin-sparing Mastectomy"@en .
+
+data:RiskOfBreastCancerSystemicRecurrence
+      a                               tmr:TropeType ;
+      rdfs:label                      "Risk of Breast Cancer Systemic Recurrence"@en .
+
+data:NeoplasmMetastasis
+      a                               tmr:EventType ;
+      rdfs:label                      "Neoplasm Metastasis"@en .
+
+data:ActSiliconImplant
+      a                           tmr:ActionType ;
+      rdfs:label                  "Breast Implant"@en ;
+      rdfs:label                  "Breast Silicon Prosthesis"@en ;
+      tmr:mapstoumls            umls:C0179412 . #Breast Prosthesis, Internal
+
+data:SystemicSyndromes
+      a                               tmr:EventType;
+      rdfs:label                      "Systemic Syndrome"@en .
+
+data:HealthImplications
+      a                               tmr:EventType;
+      rdfs:label                      "Health Implications"@en .
+
+data:ActBreastReconstruction
+      a                               tmr:ActionType ;
+      rdfs:label                      "Breast Reconstruction"@en .
+
+data:Complications
+      a                               tmr:EventType;
+      rdfs:label                      "Complication"@en .
+      # Radiation Injuries ???
+
+data:ActMastectomy
+      a                               tmr:ActionType ;
+      rdfs:label                      "Mastectomy"@en .

@@ -1,0 +1,22 @@
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX tmr: <http://anonymous.org/vocab/>
+SELECT ?id (GROUP_CONCAT (?transitionLabel; separator="+OR+") AS ?term)
+WHERE {
+  ?conclusion	rdf:type	    tmr:CausationBelief .
+  ?conclusion	tmr:conclusionID    ?id
+  { GRAPH ?conclusion {       #effect is referred by the main conclusion
+    [] 	   	tmr:causes 	    ?transition }
+  } UNION { ?conclusion   tmr:hasPart  ?subConclusion.
+    GRAPH ?subConclusion {    #effect is referred by the sub-conclusion
+      [] 	   	tmr:causes 	    ?transition } } .
+  { SELECT ?transition (CONCAT("(",GROUP_CONCAT (CONCAT("(",?label,")");
+  				     separator="+OR+"), ")") AS ?transitionLabel)
+    WHERE {
+    	{?transition tmr:affects ?resource}
+      UNION {?transition tmr:hasExpectedSituation ?resource}.
+		{?resource tmr:interpretedAs ?altResource}
+	 UNION {?resource tmr:relatedTo ?altResource}.
+		?altResource rdfs:label ?label
+   } GROUP BY ?transition }
+} GROUP BY ?id
